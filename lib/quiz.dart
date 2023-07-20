@@ -29,12 +29,19 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = "QuestionScreen";
+    });
+  }
+
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
+        //selectedAnswers = [];
         activeScreen = "ResultScreen";
       });
     }
@@ -49,6 +56,7 @@ class _QuizState extends State<Quiz> {
     } else if (activeScreen == "ResultScreen") {
       screenWidget = ResultScreen(
         chosenAnswers: selectedAnswers,
+        onRestartQuiz: restartQuiz,
       );
     }
 
